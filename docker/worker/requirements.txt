@@ -1,0 +1,5 @@
+schedule
+influxdb
+requests
+ta-lib
+pandas

@@ -1,0 +1,7 @@
+{
+    "testnet" : true,
+    "api" : "",
+    "secret" : "",
+    "symbol": "BTCUSD",
+    "leva": 2.0
+}

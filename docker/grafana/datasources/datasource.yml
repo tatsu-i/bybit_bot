@@ -1,0 +1,22 @@
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB
+    access: proxy
+    basicAuth: false
+    basicAuthPassword: ''
+    basicAuthUser: ''
+    database: bots
+    id: 2
+    isDefault: true
+    jsonData: {}
+    orgId: 1
+    password: ''
+    readOnly: false
+    secureJsonFields: {}
+    type: influxdb
+    typeLogoUrl: ''
+    url: http://influxdb:8086
+    user: ''
+    version: 3
+    withCredentials: false

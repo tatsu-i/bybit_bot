@@ -1,0 +1,7 @@
+requests
+influxdb
+schedule
+pyyaml
+ccxt
+pandas
+websocket-client

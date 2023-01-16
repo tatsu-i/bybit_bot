@@ -1,0 +1,57 @@
+version: '3.4'
+
+services:
+
+  worker:
+    build: ./docker/worker
+    volumes:
+      - ./conf/:/conf/
+      - ./strategy:/strategy
+
+  worker-dev:
+    build: ./docker/worker
+    volumes:
+      - ./conf/:/conf/
+      - ./strategy:/strategy
+
+
+  notify-bot:
+    build: ./docker/notify-bot
+    volumes:
+      - ./conf/asset.json:/conf/asset.json
+      - ./conf/notify.json:/conf/notify.json
+    restart: always
+
+
+  data-collector:
+    build: ./docker/data-collector
+    restart: always
+    volumes:
+      - ./data:/data
+    depends_on:
+      - grafana
+
+
+  influxdb:
+    image: influxdb:1.7.11
+    ports:
+      - "127.0.0.1:8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=bots
+      - INFLUXDB_HTTP_LOG_ENABLED=false
+      - INFLUXDB_DATA_QUERY_LOG_ENABLED=false
+
+  grafana:
+    build: docker/grafana
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./docker/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - influxdb
+
+volumes:
+  influxdb-data:
